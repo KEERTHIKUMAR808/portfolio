@@ -17,16 +17,28 @@ rel="stylesheet">
 
 <style>
 
+/* =========================================================
+   ROOT
+========================================================= */
+
 :root {
-    --bg: #f4f3ee;
-    --surface: #ebe9e1;
-    --dark: #101210;
-    --dark2: #171a17;
-    --text: #111311;
-    --muted: #6d6d66;
-    --line: #d1d0c8;
-    --green: #c8ff3d;
-    --white: #f7f7f2;
+    --bg: #060a14;
+    --bg2: #0a1020;
+    --surface: #0d1527;
+    --surface2: #111c32;
+
+    --blue: #4da3ff;
+    --cyan: #45e7ff;
+    --violet: #8d6cff;
+
+    --text: #f2f6ff;
+    --muted: #8e9ab3;
+    --muted2: #64718a;
+
+    --line: rgba(130,160,210,.16);
+    --line-bright: rgba(69,231,255,.28);
+
+    --white: #ffffff;
 }
 
 * {
@@ -40,11 +52,29 @@ html {
 }
 
 body {
-    background: var(--bg);
+    background:
+        radial-gradient(circle at 80% 10%, rgba(77,163,255,.09), transparent 28%),
+        radial-gradient(circle at 10% 50%, rgba(141,108,255,.07), transparent 30%),
+        var(--bg);
+
     color: var(--text);
     font-family: "DM Sans", sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+
+    background-size: 60px 60px;
 }
 
 a {
@@ -52,9 +82,10 @@ a {
     text-decoration: none;
 }
 
-/* =========================
+
+/* =========================================================
    NAVIGATION
-========================= */
+========================================================= */
 
 header {
     position: fixed;
@@ -63,16 +94,16 @@ header {
     width: 100%;
     z-index: 1000;
 
-    background: rgba(244,243,238,0.88);
-    backdrop-filter: blur(15px);
+    background: rgba(6,10,20,.72);
+    backdrop-filter: blur(22px);
 
-    border-bottom: 1px solid rgba(17,19,17,0.08);
+    border-bottom: 1px solid var(--line);
 }
 
 .navbar {
     width: 92%;
-    max-width: 1200px;
-    height: 76px;
+    max-width: 1250px;
+    height: 78px;
     margin: auto;
 
     display: flex;
@@ -81,81 +112,109 @@ header {
 }
 
 .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
     font-family: "Space Grotesk";
     font-weight: 700;
+    letter-spacing: -.02em;
 }
 
 .logo span {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
 
     display: grid;
     place-items: center;
 
-    border: 1.5px solid var(--text);
-    border-radius: 50%;
+    border: 1px solid rgba(69,231,255,.5);
+    border-radius: 10px;
+
+    color: var(--cyan);
+
+    background:
+        linear-gradient(135deg, rgba(69,231,255,.1), rgba(141,108,255,.1));
+
+    box-shadow:
+        0 0 25px rgba(69,231,255,.08);
 
     font-size: 11px;
 }
 
 .nav-links {
     display: flex;
-    gap: 28px;
+    gap: 30px;
 }
 
 .nav-links a,
 .nav-button {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    font-size: 11px;
+    color: #aeb8ca;
+    transition: .25s ease;
 }
 
 .nav-links a:hover {
-    opacity: 0.5;
+    color: var(--cyan);
 }
 
 .nav-button {
-    border: 1px solid var(--text);
+    padding: 10px 17px;
+
+    border: 1px solid rgba(69,231,255,.35);
     border-radius: 30px;
-    padding: 10px 15px;
+
+    color: var(--cyan);
+
+    background: rgba(69,231,255,.04);
+}
+
+.nav-button:hover {
+    background: rgba(69,231,255,.1);
 }
 
 .menu-button {
     display: none;
+
     border: 0;
     background: none;
-    font-size: 24px;
+
+    color: var(--text);
+    font-size: 25px;
 }
 
-/* =========================
+
+/* =========================================================
    HERO
-========================= */
+========================================================= */
 
 .hero {
     min-height: 100vh;
-    max-width: 1200px;
+
+    width: 92%;
+    max-width: 1250px;
 
     margin: auto;
-    padding: 145px 4% 70px;
+    padding: 145px 0 80px;
 
     display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
+    grid-template-columns: 1fr 1fr;
 
-    gap: 45px;
+    gap: 40px;
     align-items: center;
 }
 
 .available {
     display: flex;
     align-items: center;
-    gap: 9px;
+    gap: 10px;
 
-    margin-bottom: 25px;
+    margin-bottom: 27px;
 
     font-family: "JetBrains Mono";
     font-size: 10px;
 
-    letter-spacing: 0.08em;
+    color: #9aa8bf;
 }
 
 .available-dot {
@@ -164,112 +223,162 @@ header {
 
     border-radius: 50%;
 
-    background: #4fa526;
+    background: var(--cyan);
 
-    box-shadow: 0 0 0 5px #dfe9d8;
+    box-shadow:
+        0 0 0 5px rgba(69,231,255,.08),
+        0 0 20px rgba(69,231,255,.6);
+
+    animation: blink 2s infinite;
 }
 
 .hero h1 {
     font-family: "Space Grotesk";
 
-    font-size: clamp(52px, 7vw, 90px);
+    font-size: clamp(58px, 7vw, 96px);
 
-    line-height: 0.94;
+    line-height: .91;
 
-    letter-spacing: -0.065em;
+    letter-spacing: -.075em;
 }
 
 .outline {
     color: transparent;
-    -webkit-text-stroke: 1px var(--text);
+
+    -webkit-text-stroke: 1px #8290aa;
+
+    text-shadow:
+        0 0 35px rgba(77,163,255,.08);
 }
 
-.green-word {
-    color: var(--green);
-    background: var(--dark);
+.blue-word {
+    display: inline-block;
 
-    padding: 0 8px;
+    background: linear-gradient(
+        90deg,
+        var(--cyan),
+        var(--blue),
+        var(--violet)
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
 }
 
 .hero-description {
     max-width: 680px;
 
-    margin: 30px 0;
+    margin: 31px 0;
 
     color: var(--muted);
 
     font-size: 16px;
 }
 
+.hero-description strong {
+    color: #eaf2ff;
+}
+
 .hero-buttons {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 11px;
 }
 
 .button {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
 
-    padding: 13px 18px;
+    padding: 13px 19px;
 
-    border-radius: 4px;
+    border-radius: 7px;
 
     font-size: 10px;
     font-weight: 700;
 
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: .04em;
+
+    transition: .25s ease;
 }
 
 .button-primary {
-    background: var(--dark);
-    color: var(--white);
+    color: #03101b;
+
+    background: linear-gradient(
+        135deg,
+        var(--cyan),
+        var(--blue)
+    );
+
+    box-shadow:
+        0 10px 35px rgba(69,231,255,.13);
+}
+
+.button-primary:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 15px 40px rgba(69,231,255,.22);
 }
 
 .button-secondary {
-    border: 1px solid var(--text);
+    border: 1px solid rgba(130,160,210,.25);
+
+    color: #b8c5d9;
+
+    background: rgba(255,255,255,.025);
 }
 
 .button-secondary:hover {
-    background: #deddd6;
+    border-color: rgba(69,231,255,.45);
+    color: var(--cyan);
 }
 
 .social-links {
     display: flex;
-    gap: 24px;
+    gap: 25px;
 
-    margin-top: 24px;
+    margin-top: 25px;
 
-    color: var(--muted);
+    color: #75839b;
 
     font-size: 11px;
 }
 
 .social-links a {
-    text-decoration: underline;
-    text-underline-offset: 5px;
+    border-bottom: 1px solid rgba(117,131,155,.4);
+
+    padding-bottom: 3px;
+
+    transition: .25s ease;
 }
 
-/* =========================
-   VLSI CHIP ANIMATION
-========================= */
+.social-links a:hover {
+    color: var(--cyan);
+    border-color: var(--cyan);
+}
+
+
+/* =========================================================
+   VLSI CHIP VISUAL
+========================================================= */
 
 .vlsi-visual {
-    min-height: 540px;
+    min-height: 560px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
     position: relative;
-
-    overflow: hidden;
 }
 
 .vlsi-scene {
-    width: 460px;
-    height: 460px;
+    width: 510px;
+    height: 510px;
 
     position: relative;
 
@@ -278,19 +387,45 @@ header {
     justify-content: center;
 }
 
-/* rotating outer ring */
+
+/* outer glow */
+
+.vlsi-scene::before {
+    content: "";
+
+    position: absolute;
+
+    width: 350px;
+    height: 350px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(69,231,255,.13),
+            rgba(77,163,255,.05) 40%,
+            transparent 70%
+        );
+
+    filter: blur(12px);
+}
+
+
+/* rotating orbit */
 
 .orbit {
     position: absolute;
 
-    width: 430px;
-    height: 430px;
+    width: 455px;
+    height: 455px;
 
-    border: 1px dashed #aaa9a1;
+    border:
+        1px dashed rgba(69,231,255,.22);
 
     border-radius: 50%;
 
-    animation: rotate 28s linear infinite;
+    animation: rotate 24s linear infinite;
 }
 
 .orbit::before,
@@ -299,12 +434,15 @@ header {
 
     position: absolute;
 
-    width: 9px;
-    height: 9px;
-
-    background: var(--dark);
+    width: 8px;
+    height: 8px;
 
     border-radius: 50%;
+
+    background: var(--cyan);
+
+    box-shadow:
+        0 0 18px var(--cyan);
 }
 
 .orbit::before {
@@ -317,11 +455,29 @@ header {
     right: 50%;
 }
 
-/* chip body */
+
+/* second orbit */
+
+.orbit-two {
+    position: absolute;
+
+    width: 390px;
+    height: 390px;
+
+    border:
+        1px solid rgba(141,108,255,.16);
+
+    border-radius: 50%;
+
+    animation: rotateReverse 18s linear infinite;
+}
+
+
+/* chip */
 
 .chip-body {
-    width: 280px;
-    height: 280px;
+    width: 285px;
+    height: 285px;
 
     position: relative;
 
@@ -330,114 +486,154 @@ header {
     justify-content: center;
 
     background:
-        linear-gradient(#343934 1px, transparent 1px),
-        linear-gradient(90deg,#343934 1px,transparent 1px);
+        linear-gradient(rgba(69,231,255,.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(69,231,255,.07) 1px, transparent 1px),
+        linear-gradient(145deg, #111c32, #080e1c);
 
-    background-size: 25px 25px;
+    background-size: 24px 24px;
 
-    background-color: #111411;
-
-    border: 2px solid #292d29;
+    border:
+        1px solid rgba(69,231,255,.4);
 
     box-shadow:
-        0 0 0 15px rgba(16,18,16,.05),
-        0 0 60px rgba(16,18,16,.12);
+        0 0 0 12px rgba(69,231,255,.025),
+        0 0 80px rgba(69,231,255,.12),
+        inset 0 0 45px rgba(69,231,255,.035);
 
     animation: floatChip 5s ease-in-out infinite;
 }
 
-/* chip pins */
+
+/* chip corners */
+
+.chip-body::before,
+.chip-body::after {
+    content: "";
+
+    position: absolute;
+
+    width: 28px;
+    height: 28px;
+
+    border-color: var(--cyan);
+    border-style: solid;
+}
+
+.chip-body::before {
+    top: -1px;
+    left: -1px;
+
+    border-width: 2px 0 0 2px;
+}
+
+.chip-body::after {
+    right: -1px;
+    bottom: -1px;
+
+    border-width: 0 2px 2px 0;
+}
+
+
+/* pins */
 
 .chip-pin {
     position: absolute;
 
-    width: 32px;
+    width: 34px;
     height: 3px;
 
-    background: var(--green);
+    background: linear-gradient(
+        90deg,
+        var(--blue),
+        var(--cyan)
+    );
+
+    box-shadow:
+        0 0 10px rgba(69,231,255,.35);
 }
 
 .pin-left-1 {
-    left: -32px;
+    left: -34px;
     top: 22%;
 }
 
 .pin-left-2 {
-    left: -32px;
+    left: -34px;
     top: 38%;
 }
 
 .pin-left-3 {
-    left: -32px;
+    left: -34px;
     top: 54%;
 }
 
 .pin-left-4 {
-    left: -32px;
+    left: -34px;
     top: 70%;
 }
 
 .pin-right-1 {
-    right: -32px;
+    right: -34px;
     top: 22%;
 }
 
 .pin-right-2 {
-    right: -32px;
+    right: -34px;
     top: 38%;
 }
 
 .pin-right-3 {
-    right: -32px;
+    right: -34px;
     top: 54%;
 }
 
 .pin-right-4 {
-    right: -32px;
+    right: -34px;
     top: 70%;
 }
 
 .pin-top-1 {
-    top: -32px;
+    top: -34px;
     left: 22%;
     transform: rotate(90deg);
 }
 
 .pin-top-2 {
-    top: -32px;
+    top: -34px;
     left: 42%;
     transform: rotate(90deg);
 }
 
 .pin-top-3 {
-    top: -32px;
+    top: -34px;
     left: 62%;
     transform: rotate(90deg);
 }
 
 .pin-bottom-1 {
-    bottom: -32px;
+    bottom: -34px;
     left: 22%;
     transform: rotate(90deg);
 }
 
 .pin-bottom-2 {
-    bottom: -32px;
+    bottom: -34px;
     left: 42%;
     transform: rotate(90deg);
 }
 
 .pin-bottom-3 {
-    bottom: -32px;
+    bottom: -34px;
     left: 62%;
     transform: rotate(90deg);
 }
 
-/* central IC */
+
+/* IC core */
 
 .ic-core {
-    width: 145px;
-    height: 145px;
+    width: 150px;
+    height: 150px;
 
     position: relative;
 
@@ -446,17 +642,24 @@ header {
     align-items: center;
     justify-content: center;
 
-    background: #0d100d;
+    background:
+        radial-gradient(
+            circle,
+            #14243c,
+            #08111f
+        );
 
-    border: 2px solid var(--green);
+    border:
+        2px solid var(--cyan);
 
-    color: var(--green);
+    color: var(--cyan);
 
     box-shadow:
-        0 0 25px rgba(200,255,61,.18),
-        inset 0 0 30px rgba(200,255,61,.04);
+        0 0 25px rgba(69,231,255,.18),
+        0 0 70px rgba(69,231,255,.08),
+        inset 0 0 35px rgba(69,231,255,.05);
 
-    animation: pulse 2.5s ease-in-out infinite;
+    animation: pulse 3s ease-in-out infinite;
 }
 
 .ic-core::before {
@@ -466,7 +669,8 @@ header {
 
     inset: 10px;
 
-    border: 1px dashed rgba(200,255,61,.35);
+    border:
+        1px dashed rgba(69,231,255,.35);
 }
 
 .ic-core strong {
@@ -474,68 +678,84 @@ header {
     z-index: 2;
 
     font-family: "Space Grotesk";
-    font-size: 34px;
+
+    font-size: 38px;
 }
 
 .ic-core span {
     position: relative;
     z-index: 2;
 
-    margin-top: 3px;
+    margin-top: 4px;
 
     font-family: "JetBrains Mono";
+
     font-size: 8px;
 
-    letter-spacing: 0.13em;
+    letter-spacing: .13em;
+
+    color: #91a9c8;
 }
+
 
 /* floating labels */
 
 .vlsi-label {
     position: absolute;
 
-    padding: 8px 10px;
+    padding: 9px 11px;
 
-    background: var(--dark);
+    background: rgba(8,15,29,.86);
 
-    color: var(--green);
+    color: #9dc9ff;
 
     font-family: "JetBrains Mono";
+
     font-size: 8px;
 
-    letter-spacing: .08em;
+    letter-spacing: .06em;
 
-    border: 1px solid #363b35;
+    border:
+        1px solid rgba(69,231,255,.22);
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,.2);
+
+    backdrop-filter: blur(10px);
 
     animation: labelFloat 4s ease-in-out infinite;
 }
 
 .label-rtl {
-    top: 7%;
-    left: 1%;
+    top: 8%;
+    left: 2%;
 }
 
 .label-verilog {
-    right: 0;
+    right: 1%;
     top: 22%;
+
     animation-delay: 1s;
 }
 
 .label-layout {
     left: 0;
     bottom: 20%;
+
     animation-delay: 2s;
 }
 
 .label-silicon {
     right: 2%;
-    bottom: 7%;
+    bottom: 8%;
+
     animation-delay: 3s;
 }
 
-/* =========================
+
+/* =========================================================
    ANIMATIONS
-========================= */
+========================================================= */
 
 @keyframes rotate {
     from {
@@ -544,6 +764,16 @@ header {
 
     to {
         transform: rotate(360deg);
+    }
+}
+
+@keyframes rotateReverse {
+    from {
+        transform: rotate(360deg);
+    }
+
+    to {
+        transform: rotate(0deg);
     }
 }
 
@@ -562,14 +792,16 @@ header {
 
     0%,100% {
         box-shadow:
-            0 0 25px rgba(200,255,61,.18),
-            inset 0 0 30px rgba(200,255,61,.04);
+            0 0 25px rgba(69,231,255,.18),
+            0 0 70px rgba(69,231,255,.08),
+            inset 0 0 35px rgba(69,231,255,.05);
     }
 
     50% {
         box-shadow:
-            0 0 50px rgba(200,255,61,.30),
-            inset 0 0 40px rgba(200,255,61,.08);
+            0 0 45px rgba(69,231,255,.3),
+            0 0 100px rgba(77,163,255,.1),
+            inset 0 0 45px rgba(69,231,255,.08);
     }
 }
 
@@ -584,89 +816,76 @@ header {
     }
 }
 
-/* =========================
-   TICKER
-========================= */
+@keyframes blink {
 
-.ticker {
-    overflow: hidden;
+    0%,100% {
+        opacity: 1;
+    }
 
-    background: var(--green);
-
-    border-block: 1px solid var(--dark);
+    50% {
+        opacity: .35;
+    }
 }
 
-.ticker-content {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
 
-    padding: 14px;
-
-    min-width: max-content;
-
-    font-family: "JetBrains Mono";
-    font-size: 9px;
-    font-weight: 600;
-
-    letter-spacing: .1em;
-}
-
-/* =========================
-   COMMON SECTION
-========================= */
+/* =========================================================
+   SECTION COMMON
+========================================================= */
 
 .section {
-    max-width: 1200px;
+    width: 92%;
+    max-width: 1250px;
 
     margin: auto;
 
-    padding: 110px 4%;
+    padding: 115px 0;
 }
 
 .section-label {
     margin-bottom: 38px;
 
-    color: #77766f;
+    color: #66758f;
 
     font-family: "JetBrains Mono";
+
     font-size: 10px;
 
-    letter-spacing: .14em;
+    letter-spacing: .08em;
 }
 
 .section-title {
     font-family: "Space Grotesk";
 
-    font-size: clamp(44px,5.5vw,70px);
+    font-size: clamp(46px,5.5vw,72px);
 
     line-height: .96;
 
-    letter-spacing: -.06em;
+    letter-spacing: -.065em;
 }
 
 .section-title em {
     color: transparent;
 
-    -webkit-text-stroke: 1px var(--text);
+    -webkit-text-stroke: 1px #8393ad;
 
     font-style: normal;
 }
 
-/* =========================
+
+/* =========================================================
    ABOUT
-========================= */
+========================================================= */
 
 .about-grid {
     display: grid;
 
     grid-template-columns: 1fr 1fr;
 
-    gap: 90px;
+    gap: 100px;
 }
 
 .about-text {
-    max-width: 600px;
+    max-width: 620px;
 
     color: var(--muted);
 
@@ -674,91 +893,110 @@ header {
 }
 
 .about-text p + p {
-    margin-top: 19px;
+    margin-top: 20px;
 }
 
 .highlight {
     margin-top: 30px;
 
-    padding: 20px;
+    padding: 20px 22px;
 
-    border-left: 3px solid var(--green);
+    border-left:
+        2px solid var(--cyan);
 
-    background: var(--surface);
+    background:
+        linear-gradient(
+            90deg,
+            rgba(69,231,255,.07),
+            transparent
+        );
 
-    color: var(--text);
+    color: #d7e6fa;
 
     font-weight: 600;
 }
 
-/* =========================
+
+/* =========================================================
    EXPERIENCE
-========================= */
+========================================================= */
 
 .dark-section {
-    max-width: none;
+    width: 100%;
 
-    background: var(--dark);
+    background:
+        radial-gradient(
+            circle at 90% 20%,
+            rgba(77,163,255,.08),
+            transparent 30%
+        ),
 
-    color: var(--white);
+        linear-gradient(
+            180deg,
+            #08101f,
+            #060a14
+        );
+
+    border-block:
+        1px solid var(--line);
 }
 
 .dark-inner {
-    max-width: 1200px;
+    width: 92%;
+    max-width: 1250px;
 
     margin: auto;
 
-    padding: 110px 4%;
+    padding: 115px 0;
 }
 
 .dark-section .section-label {
-    color: #888b83;
+    color: #667d9f;
 }
 
 .dark-section .section-title em {
-    color: transparent;
-
-    -webkit-text-stroke: 1px var(--white);
+    -webkit-text-stroke: 1px #7185a6;
 }
 
 .experience {
-    margin-top: 45px;
+    margin-top: 50px;
 
-    padding: 43px 0;
+    padding: 45px 0;
 
     display: grid;
 
     grid-template-columns: 220px 1fr;
 
-    gap: 40px;
+    gap: 45px;
 
-    border-block: 1px solid #383b35;
+    border-block:
+        1px solid var(--line);
 }
 
 .experience-date {
     font-family: "JetBrains Mono";
 
-    font-size: 9px;
+    font-size: 10px;
 
-    color: #85887f;
+    color: #65758f;
 }
 
 .experience-role {
-    color: var(--green);
+    color: var(--cyan);
 
     font-family: "JetBrains Mono";
 
     font-size: 10px;
 
-    letter-spacing: .1em;
+    letter-spacing: .08em;
 }
 
 .experience h3 {
-    margin-top: 7px;
+    margin-top: 8px;
 
     font-family: "Space Grotesk";
 
-    font-size: 29px;
+    font-size: 30px;
 }
 
 .experience-description {
@@ -766,31 +1004,32 @@ header {
 
     margin: 20px 0;
 
-    color: #a5a69f;
+    color: #8997ad;
 }
 
 .experience ul {
     padding-left: 18px;
 
-    color: #a5a69f;
+    color: #8997ad;
 
     font-size: 14px;
 }
 
 .experience li + li {
-    margin-top: 8px;
+    margin-top: 9px;
 }
 
-/* =========================
+
+/* =========================================================
    PROJECTS
-========================= */
+========================================================= */
 
 .projects {
-    background: var(--bg);
+    background: transparent;
 }
 
 .project-grid {
-    margin-top: 48px;
+    margin-top: 50px;
 
     display: grid;
 
@@ -800,15 +1039,31 @@ header {
 }
 
 .project-card {
-    background: var(--surface);
+    position: relative;
 
-    border: 1px solid var(--line);
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17,28,50,.95),
+            rgba(8,14,28,.95)
+        );
+
+    border:
+        1px solid var(--line);
 
     transition: .3s ease;
 }
 
 .project-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-6px);
+
+    border-color:
+        rgba(69,231,255,.25);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.2);
 }
 
 .project-card.featured {
@@ -816,11 +1071,11 @@ header {
 
     display: grid;
 
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: .8fr 1.2fr;
 }
 
 .project-visual {
-    min-height: 300px;
+    min-height: 290px;
 
     position: relative;
 
@@ -834,75 +1089,125 @@ header {
 .project-number {
     position: absolute;
 
-    top: 16px;
-    left: 18px;
+    top: 18px;
+    left: 20px;
 
     font-family: "JetBrains Mono";
 
     font-size: 10px;
+
+    color: #6c7c95;
 }
 
-/* UART */
+
+/* UART visual */
 
 .uart-visual {
-    background: var(--dark);
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(69,231,255,.13),
+            transparent 55%
+        ),
 
-    color: var(--green);
+        linear-gradient(
+            135deg,
+            #0c1830,
+            #080d1a
+        );
 }
 
-.uart-screen {
-    width: 74%;
-    height: 64%;
+.uart-chip {
+    width: 180px;
+    height: 180px;
 
-    padding: 24px;
+    position: relative;
 
-    border: 1px solid #394139;
+    display: grid;
+    place-items: center;
+
+    border:
+        1px solid rgba(69,231,255,.45);
+
+    background:
+        linear-gradient(
+            135deg,
+            #13243f,
+            #09111f
+        );
+
+    box-shadow:
+        0 0 55px rgba(69,231,255,.1);
+}
+
+.uart-chip::before {
+    content: "";
+
+    position: absolute;
+    inset: 18px;
+
+    border:
+        1px dashed rgba(69,231,255,.25);
+}
+
+.uart-chip strong {
+    font-family: "Space Grotesk";
+
+    font-size: 25px;
+
+    color: var(--cyan);
+}
+
+.uart-chip small {
+    position: absolute;
+
+    bottom: 35px;
 
     font-family: "JetBrains Mono";
 
-    font-size: 10px;
+    font-size: 7px;
+
+    color: #8295b1;
 }
 
-.uart-screen strong {
-    font-size: 14px;
-}
-
-.uart-line {
-    height: 6px;
-
-    margin: 13px 0;
-
-    background: #394238;
-}
-
-.uart-line.green {
-    width: 75%;
-
-    background: var(--green);
-}
-
-.uart-line.short {
-    width: 45%;
-}
 
 /* Parkinson */
 
 .parkinson-visual {
-    background: #d9e1dc;
+    background:
+        radial-gradient(
+            circle,
+            rgba(141,108,255,.18),
+            transparent 60%
+        ),
+
+        #0b1122;
 }
 
 .signal {
+    height: 100px;
+
     display: flex;
 
     align-items: center;
 
-    gap: 5px;
+    gap: 6px;
 }
 
 .signal i {
     width: 7px;
 
-    background: var(--dark);
+    background:
+        linear-gradient(
+            180deg,
+            var(--violet),
+            var(--blue)
+        );
+
+    border-radius: 5px;
+
+    box-shadow:
+        0 0 12px rgba(141,108,255,.25);
 }
 
 .signal i:nth-child(1) {
@@ -929,15 +1234,23 @@ header {
     height: 30px;
 }
 
+
 /* Gas */
 
 .gas-visual {
-    background: #ddd4c5;
+    background:
+        radial-gradient(
+            circle,
+            rgba(69,231,255,.1),
+            transparent 60%
+        ),
+
+        #0a1521;
 }
 
 .gas-box {
-    width: 185px;
-    height: 120px;
+    width: 190px;
+    height: 125px;
 
     display: grid;
 
@@ -945,42 +1258,64 @@ header {
 
     align-content: center;
 
-    background: #cec3b1;
+    background:
+        linear-gradient(
+            145deg,
+            #12283b,
+            #09131f
+        );
 
-    border: 2px solid var(--dark);
+    border:
+        1px solid rgba(69,231,255,.35);
 
-    box-shadow: 9px 9px 0 var(--dark);
+    box-shadow:
+        8px 8px 0 rgba(69,231,255,.12);
 }
 
 .gas-box strong {
     font-family: "Space Grotesk";
 
-    font-size: 29px;
+    font-size: 30px;
+
+    color: var(--cyan);
 }
 
 .gas-box small {
+    margin-top: 4px;
+
     font-family: "JetBrains Mono";
 
-    font-size: 9px;
+    font-size: 8px;
+
+    color: #7e91aa;
 }
+
 
 /* Razorpay project */
 
 .risk-visual {
-    background: #141813;
+    background:
+        radial-gradient(
+            circle,
+            rgba(141,108,255,.18),
+            transparent 58%
+        ),
 
-    color: var(--green);
+        #0b1020;
+
+    color: var(--violet);
 }
 
 .risk-circle {
-    width: 135px;
-    height: 135px;
+    width: 140px;
+    height: 140px;
 
     display: grid;
 
     place-items: center;
 
-    border: 2px solid var(--green);
+    border:
+        1px solid var(--violet);
 
     border-radius: 50%;
 
@@ -988,25 +1323,28 @@ header {
 
     font-family: "Space Grotesk";
 
-    font-size: 25px;
+    font-size: 23px;
+
+    box-shadow:
+        0 0 50px rgba(141,108,255,.14);
 }
 
 .project-content {
-    padding: 30px;
+    padding: 32px;
 }
 
 .project-category {
-    color: #77756e;
+    color: #657691;
 
     font-family: "JetBrains Mono";
 
     font-size: 9px;
 
-    letter-spacing: .11em;
+    letter-spacing: .08em;
 }
 
 .project-content h3 {
-    margin: 10px 0;
+    margin: 11px 0;
 
     font-family: "Space Grotesk";
 
@@ -1016,7 +1354,7 @@ header {
 }
 
 .project-content p {
-    color: #64635d;
+    color: #8795aa;
 
     font-size: 14px;
 }
@@ -1028,15 +1366,20 @@ header {
 
     gap: 7px;
 
-    margin-top: 21px;
+    margin-top: 22px;
 }
 
 .project-tags span {
-    padding: 6px 8px;
+    padding: 6px 9px;
 
-    border: 1px solid #c6c4bb;
+    border:
+        1px solid rgba(130,160,210,.18);
 
-    border-radius: 3px;
+    border-radius: 4px;
+
+    color: #94a6c1;
+
+    background: rgba(255,255,255,.02);
 
     font-size: 9px;
 }
@@ -1048,43 +1391,60 @@ header {
 
     padding-bottom: 3px;
 
-    border-bottom: 1px solid;
+    border-bottom:
+        1px solid rgba(69,231,255,.4);
+
+    color: var(--cyan);
 
     font-size: 10px;
 
-    font-weight: 700;
-
-    text-transform: uppercase;
+    font-weight: 600;
 }
 
-/* =========================
-   TECHNICAL SKILLS
-========================= */
+
+/* =========================================================
+   SKILLS
+========================================================= */
 
 .skills-board {
-    margin-top: 48px;
+    margin-top: 50px;
 
     display: grid;
 
     grid-template-columns: repeat(3,1fr);
 
-    border-top: 1px solid #383b35;
+    border-top:
+        1px solid var(--line);
 
-    border-left: 1px solid #383b35;
+    border-left:
+        1px solid var(--line);
 }
 
 .skill {
-    min-height: 290px;
+    min-height: 300px;
 
-    padding: 28px;
+    padding: 30px;
 
-    border-right: 1px solid #383b35;
+    border-right:
+        1px solid var(--line);
 
-    border-bottom: 1px solid #383b35;
+    border-bottom:
+        1px solid var(--line);
+
+    transition: .3s ease;
+}
+
+.skill:hover {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(69,231,255,.045),
+            transparent
+        );
 }
 
 .skill-number {
-    color: #85887f;
+    color: #61728d;
 
     font-family: "JetBrains Mono";
 
@@ -1092,7 +1452,7 @@ header {
 }
 
 .skill h3 {
-    margin-top: 34px;
+    margin-top: 35px;
 
     font-family: "Space Grotesk";
 
@@ -1106,29 +1466,41 @@ header {
 
     gap: 7px;
 
-    margin-top: 20px;
+    margin-top: 21px;
 }
 
 .skill-tags span {
     padding: 6px 8px;
 
-    border: 1px solid #42463f;
+    border:
+        1px solid rgba(130,160,210,.17);
 
-    color: #b9bbb2;
+    color: #9baac0;
+
+    background: rgba(255,255,255,.018);
 
     font-size: 9px;
 }
 
-/* =========================
+
+/* =========================================================
    EDUCATION
-========================= */
+========================================================= */
 
 .education {
-    background: #ebe9e2;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(10,16,32,.7),
+            rgba(6,10,20,.9)
+        );
+
+    border-top:
+        1px solid var(--line);
 }
 
 .education-grid {
-    margin-top: 48px;
+    margin-top: 50px;
 
     display: grid;
 
@@ -1138,17 +1510,19 @@ header {
 }
 
 .education-list {
-    border-top: 1px solid var(--line);
+    border-top:
+        1px solid var(--line);
 }
 
 .education-item {
-    padding: 24px 0;
+    padding: 25px 0;
 
-    border-bottom: 1px solid var(--line);
+    border-bottom:
+        1px solid var(--line);
 }
 
 .education-item span {
-    color: #77756e;
+    color: #64748b;
 
     font-family: "JetBrains Mono";
 
@@ -1156,22 +1530,23 @@ header {
 }
 
 .education-item h3 {
-    margin-top: 7px;
+    margin-top: 8px;
 
     font-family: "Space Grotesk";
 
     font-size: 22px;
+
+    color: #e8f0fc;
 }
 
 .education-item p {
-    color: #77756e;
+    color: #77869e;
 
     font-size: 13px;
 }
 
-/* =========================
-   SCHOOL DETAILS
-========================= */
+
+/* school cards */
 
 .school-details {
     margin-top: 35px;
@@ -1184,11 +1559,17 @@ header {
 }
 
 .school-card {
-    padding: 18px;
+    padding: 20px;
 
-    background: #f2f0e9;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17,28,50,.8),
+            rgba(9,15,28,.8)
+        );
 
-    border: 1px solid var(--line);
+    border:
+        1px solid var(--line);
 }
 
 .school-card span {
@@ -1196,148 +1577,184 @@ header {
 
     font-size: 9px;
 
-    color: #77756e;
+    color: #65758d;
 }
 
 .school-card h4 {
-    margin-top: 6px;
-
-    font-family: "Space Grotesk";
-
-    font-size: 16px;
-}
-
-.school-card p {
-    color: #77756e;
-
-    font-size: 12px;
-}
-
-/* =========================
-   PUBLICATION
-========================= */
-
-.publication {
-    margin-top: 20px;
-
-    padding: 27px;
-
-    background: var(--green);
-
-    border: 1px solid var(--dark);
-}
-
-.publication span {
-    font-family: "JetBrains Mono";
-
-    font-size: 9px;
-}
-
-.publication h3 {
     margin-top: 7px;
 
     font-family: "Space Grotesk";
 
-    font-size: 21px;
+    font-size: 17px;
 }
 
-.publication p {
-    margin-top: 4px;
+.school-card p {
+    color: #78879e;
 
-    font-size: 13px;
+    font-size: 12px;
 }
 
-/* =========================
+
+/* =========================================================
    CERTIFICATIONS
-========================= */
+========================================================= */
 
 .certifications {
-    margin-top: 45px;
+    margin-top: 55px;
+}
+
+.certifications .section-label {
+    margin-bottom: 18px;
 }
 
 .certificates {
-    display: flex;
+    display: grid;
 
-    flex-wrap: wrap;
+    grid-template-columns: 1fr 1fr;
 
-    gap: 9px;
-
-    margin-top: 16px;
+    gap: 12px;
 }
 
-.certificates span {
-    padding: 9px 12px;
+.certificate {
+    position: relative;
 
-    border: 1px solid var(--line);
+    padding: 20px 22px;
 
-    font-size: 11px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17,28,50,.9),
+            rgba(8,14,27,.9)
+        );
+
+    border:
+        1px solid var(--line);
+
+    transition: .3s ease;
 }
 
-/* =========================
+.certificate:hover {
+    border-color:
+        rgba(69,231,255,.32);
+
+    transform: translateY(-3px);
+}
+
+.certificate:first-child {
+    grid-column: span 2;
+
+    border-color:
+        rgba(141,108,255,.28);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(141,108,255,.08),
+            rgba(17,28,50,.8)
+        );
+}
+
+.certificate-type {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-family: "JetBrains Mono";
+
+    font-size: 8px;
+
+    color: #667c9c;
+
+    letter-spacing: .08em;
+}
+
+.certificate h3 {
+    font-family: "Space Grotesk";
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    color: #dce8f8;
+}
+
+
+/* =========================================================
    CONTACT
-========================= */
+========================================================= */
 
 .contact {
-    max-width: none;
+    width: 100%;
 
-    background: var(--dark);
+    background:
+        radial-gradient(
+            circle at 75% 20%,
+            rgba(69,231,255,.09),
+            transparent 28%
+        ),
 
-    color: var(--white);
+        radial-gradient(
+            circle at 20% 80%,
+            rgba(141,108,255,.09),
+            transparent 30%
+        ),
+
+        #050912;
+
+    border-top:
+        1px solid var(--line);
 }
 
 .contact-inner {
-    max-width: 1200px;
+    width: 92%;
+    max-width: 1250px;
 
     margin: auto;
 
-    padding: 120px 4%;
+    padding: 125px 0;
 }
 
 .contact .section-label {
-    color: #898c84;
+    color: #66758e;
 }
 
 .contact h2 {
     font-family: "Space Grotesk";
 
-    font-size: clamp(50px,7vw,90px);
+    font-size: clamp(52px,7vw,92px);
 
-    line-height: .94;
+    line-height: .93;
 
-    letter-spacing: -.06em;
+    letter-spacing: -.07em;
 }
 
 .contact h2 em {
     color: transparent;
 
-    -webkit-text-stroke: 1px var(--white);
+    -webkit-text-stroke:
+        1px #7c8da8;
 
     font-style: normal;
 }
 
 .contact-description {
-    max-width: 650px;
+    max-width: 680px;
 
-    margin: 25px 0 30px;
+    margin: 27px 0 32px;
 
-    color: #9b9d95;
-}
+    color: #8997ad;
 
-.contact .button-primary {
-    background: var(--green);
-
-    color: var(--dark);
+    font-size: 15px;
 }
 
 .contact .button-secondary {
-    color: var(--white);
-
-    border-color: #6f726b;
+    color: #aebbd0;
 }
 
-/* =========================
+
+/* =========================================================
    FOOTER
-========================= */
+========================================================= */
 
 footer {
     padding: 25px 4%;
@@ -1346,22 +1763,19 @@ footer {
 
     justify-content: space-between;
 
-    background: #080908;
+    background: #03060c;
 
-    color: #777970;
+    color: #59667a;
 
     font-family: "JetBrains Mono";
 
     font-size: 9px;
-
-    text-transform: uppercase;
-
-    letter-spacing: .1em;
 }
 
-/* =========================
+
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
 @media(max-width:850px) {
 
@@ -1377,11 +1791,11 @@ footer {
     .hero {
         grid-template-columns: 1fr;
 
-        padding-top: 120px;
+        padding-top: 125px;
     }
 
     .vlsi-visual {
-        min-height: 450px;
+        min-height: 500px;
     }
 
     .about-grid,
@@ -1411,23 +1825,44 @@ footer {
         grid-template-columns: 1fr;
     }
 
-    .school-details {
+    .school-details,
+    .certificates {
         grid-template-columns: 1fr;
+    }
+
+    .certificate:first-child {
+        grid-column: auto;
     }
 }
 
+
 @media(max-width:520px) {
 
+    .hero {
+        width: 90%;
+    }
+
     .hero h1 {
-        font-size: 52px;
+        font-size: 55px;
+    }
+
+    .section,
+    .dark-inner,
+    .contact-inner {
+        width: 90%;
     }
 
     .vlsi-scene {
-        transform: scale(.72);
+        transform: scale(.68);
     }
 
     .vlsi-visual {
-        height: 410px;
+        height: 420px;
+        min-height: 420px;
+    }
+
+    .project-content {
+        padding: 25px;
     }
 
     .contact .button {
@@ -1447,9 +1882,10 @@ footer {
 
 <body>
 
-<!-- =========================
+
+<!-- =======================================================
      NAVIGATION
-========================= -->
+======================================================= -->
 
 <header>
 
@@ -1457,7 +1893,9 @@ footer {
 
 <a href="#home" class="logo">
     <span>KJ</span>
+    Keerthikumar
 </a>
+
 
 <nav class="nav-links">
 
@@ -1469,12 +1907,14 @@ footer {
 
 </nav>
 
+
 <a href="#contact" class="nav-button">
-Let's Connect ↗
+    Let's Connect ↗
 </a>
 
+
 <button class="menu-button" onclick="toggleMenu()">
-☰
+    ☰
 </button>
 
 </div>
@@ -1482,14 +1922,16 @@ Let's Connect ↗
 </header>
 
 
+
 <main>
 
 
-<!-- =========================
+<!-- =======================================================
      HERO
-========================= -->
+======================================================= -->
 
 <section class="hero" id="home">
+
 
 <div>
 
@@ -1497,7 +1939,7 @@ Let's Connect ↗
 
 <span class="available-dot"></span>
 
-Available for internships &amp; jobs
+Available for internships & jobs
 
 </div>
 
@@ -1512,15 +1954,15 @@ VLSI
 
 <br>
 
-<span class="green-word">with purpose.</span>
+<span class="blue-word">with purpose.</span>
 
 </h1>
 
 
 <p class="hero-description">
 
-I am <strong>Keerthikumar J</strong>, passionate about VLSI design
-and digital hardware, with interests in RTL Design, Design Verification,
+I am <strong>Keerthikumar J</strong>, pursuing M.Tech in VLSI Design
+with an interest in digital hardware, RTL Design, Design Verification,
 Physical Design, real-time systems and communication protocols.
 
 </p>
@@ -1529,13 +1971,16 @@ Physical Design, real-time systems and communication protocols.
 <div class="hero-buttons">
 
 <a href="#projects" class="button button-primary">
-View My Projects ↓
+    View My Projects ↓
 </a>
 
-<a href="https://github.com/KEERTHIKUMAR808"
+<a
+href="https://github.com/KEERTHIKUMAR808"
 target="_blank"
 class="button button-secondary">
-GitHub ↗
+
+    GitHub ↗
+
 </a>
 
 </div>
@@ -1543,9 +1988,12 @@ GitHub ↗
 
 <div class="social-links">
 
-<a href="https://www.linkedin.com/in/keeerthikumar-j"
+<a
+href="https://www.linkedin.com/in/keeerthikumar-j"
 target="_blank">
+
 LinkedIn ↗
+
 </a>
 
 <a href="mailto:jkeerthikumar2002@gmail.com">
@@ -1557,7 +2005,10 @@ Email ↗
 </div>
 
 
-<!-- ANIMATED VLSI VISUAL -->
+
+<!-- =======================================================
+     VLSI CHIP
+======================================================= -->
 
 <div class="vlsi-visual">
 
@@ -1565,39 +2016,45 @@ Email ↗
 
 <div class="orbit"></div>
 
+<div class="orbit-two"></div>
+
 
 <div class="vlsi-label label-rtl">
-RTL DESIGN
+    RTL Design
 </div>
 
 <div class="vlsi-label label-verilog">
-VERILOG HDL
+    Verilog HDL
 </div>
 
 <div class="vlsi-label label-layout">
-PHYSICAL DESIGN
+    Physical Design
 </div>
 
 <div class="vlsi-label label-silicon">
-SEMICONDUCTOR
+    Semiconductor
 </div>
 
 
 <div class="chip-body">
+
 
 <span class="chip-pin pin-left-1"></span>
 <span class="chip-pin pin-left-2"></span>
 <span class="chip-pin pin-left-3"></span>
 <span class="chip-pin pin-left-4"></span>
 
+
 <span class="chip-pin pin-right-1"></span>
 <span class="chip-pin pin-right-2"></span>
 <span class="chip-pin pin-right-3"></span>
 <span class="chip-pin pin-right-4"></span>
 
+
 <span class="chip-pin pin-top-1"></span>
 <span class="chip-pin pin-top-2"></span>
 <span class="chip-pin pin-top-3"></span>
+
 
 <span class="chip-pin pin-bottom-1"></span>
 <span class="chip-pin pin-bottom-2"></span>
@@ -1621,51 +2078,48 @@ SEMICONDUCTOR
 </section>
 
 
-<!-- =========================
+
+<!-- =======================================================
      TICKER
-========================= -->
+======================================================= -->
 
 <div class="ticker">
 
 <div class="ticker-content">
 
-<span>VLSI DESIGN</span>
-<span>✦</span>
-
-<span>RTL DESIGN</span>
-<span>✦</span>
-
-<span>DESIGN VERIFICATION</span>
-<span>✦</span>
-
-<span>PHYSICAL DESIGN</span>
-<span>✦</span>
-
-<span>VERILOG HDL</span>
-<span>✦</span>
-
-<span>DIGITAL HARDWARE</span>
-<span>✦</span>
-
-<span>SEMICONDUCTOR DESIGN</span>
+VLSI Design
+&nbsp; • &nbsp;
+RTL Design
+&nbsp; • &nbsp;
+Design Verification
+&nbsp; • &nbsp;
+Physical Design
+&nbsp; • &nbsp;
+Verilog HDL
+&nbsp; • &nbsp;
+Digital Hardware
+&nbsp; • &nbsp;
+Semiconductor Design
 
 </div>
 
 </div>
 
 
-<!-- =========================
+
+<!-- =======================================================
      ABOUT
-========================= -->
+======================================================= -->
 
 <section class="section" id="about">
 
 <div class="section-label">
-01 — ABOUT
+01 — About
 </div>
 
 
 <div class="about-grid">
+
 
 <div>
 
@@ -1703,16 +2157,16 @@ development.
 
 <p>
 
-I enjoy applying my knowledge to practical engineering
-problems and developing reliable hardware systems.
+I enjoy applying my technical knowledge to practical
+engineering problems and developing reliable hardware systems.
 
 </p>
 
 
 <div class="highlight">
 
-Eager to apply my VLSI knowledge to real-world
-design and verification challenges.
+Eager to learn, apply my practical knowledge and grow
+through challenging opportunities in VLSI.
 
 </div>
 
@@ -1723,16 +2177,18 @@ design and verification challenges.
 </section>
 
 
-<!-- =========================
+
+<!-- =======================================================
      EXPERIENCE
-========================= -->
+======================================================= -->
 
 <section class="dark-section" id="experience">
 
 <div class="dark-inner">
 
+
 <div class="section-label">
-02 — EXPERIENCE
+02 — Experience
 </div>
 
 
@@ -1749,9 +2205,10 @@ Engineering
 
 <div class="experience">
 
+
 <div class="experience-date">
 
-JULY 2024 — AUGUST 2025
+July 2024 — August 2025
 
 </div>
 
@@ -1759,7 +2216,7 @@ JULY 2024 — AUGUST 2025
 <div>
 
 <div class="experience-role">
-HARDWARE ENGINEER
+Hardware Engineer
 </div>
 
 
@@ -1804,14 +2261,15 @@ hardware development.
 </section>
 
 
-<!-- =========================
+
+<!-- =======================================================
      PROJECTS
-========================= -->
+======================================================= -->
 
 <section class="section projects" id="projects">
 
 <div class="section-label">
-03 — PROJECTS
+03 — My Projects
 </div>
 
 
@@ -1829,6 +2287,7 @@ My <em>Projects.</em>
 
 <article class="project-card featured">
 
+
 <div class="project-visual uart-visual">
 
 <div class="project-number">
@@ -1836,35 +2295,11 @@ My <em>Projects.</em>
 </div>
 
 
-<div class="uart-screen">
+<div class="uart-chip">
 
-<strong>
-UART COMMUNICATION PROTOCOL
-</strong>
+<strong>UART</strong>
 
-
-<div class="uart-line green"></div>
-
-
-<div>
-Verilog HDL
-</div>
-
-
-<div class="uart-line"></div>
-
-
-<div>
-RTL Simulation
-</div>
-
-
-<div class="uart-line short"></div>
-
-
-<div>
-Cadence Genus
-</div>
+<small>VERILOG · RTL</small>
 
 </div>
 
@@ -1874,7 +2309,7 @@ Cadence Genus
 <div class="project-content">
 
 <div class="project-category">
-VLSI · RTL DESIGN · VERILOG
+VLSI · RTL Design · Verilog
 </div>
 
 
@@ -1908,9 +2343,11 @@ Cadence Genus.
 </article>
 
 
+
 <!-- Parkinson -->
 
 <article class="project-card">
+
 
 <div class="project-visual parkinson-visual">
 
@@ -1936,7 +2373,7 @@ Cadence Genus.
 <div class="project-content">
 
 <div class="project-category">
-MACHINE LEARNING · HEALTHCARE
+Machine Learning · Healthcare
 </div>
 
 
@@ -1968,9 +2405,11 @@ View on GitHub ↗
 </article>
 
 
+
 <!-- Colliery -->
 
 <article class="project-card">
+
 
 <div class="project-visual gas-visual">
 
@@ -1981,13 +2420,9 @@ View on GitHub ↗
 
 <div class="gas-box">
 
-<strong>
-GAS
-</strong>
+<strong>GAS</strong>
 
-<small>
-REAL-TIME ALERT
-</small>
+<small>Real-time alert</small>
 
 </div>
 
@@ -1997,7 +2432,7 @@ REAL-TIME ALERT
 <div class="project-content">
 
 <div class="project-category">
-EMBEDDED · SAFETY SYSTEM
+Embedded · Safety System
 </div>
 
 
@@ -2027,9 +2462,11 @@ sensors and real-time alarms to enhance miner safety.
 </article>
 
 
-<!-- Razorpay AI Risk Manager -->
+
+<!-- Razorpay -->
 
 <article class="project-card">
+
 
 <div class="project-visual risk-visual">
 
@@ -2044,7 +2481,7 @@ AI
 
 <br>
 
-RISK
+Risk
 
 </div>
 
@@ -2054,7 +2491,7 @@ RISK
 <div class="project-content">
 
 <div class="project-category">
-PYTHON · MACHINE LEARNING
+Python · Machine Learning
 </div>
 
 
@@ -2100,22 +2537,26 @@ View Repository ↗
 </section>
 
 
-<!-- =========================
+
+<!-- =======================================================
      TECHNICAL SKILLS
-========================= -->
+======================================================= -->
 
 <section class="dark-section" id="skills">
 
 <div class="dark-inner">
 
+
 <div class="section-label">
-04 — TECHNICAL SKILLS
+04 — Technical Skills
 </div>
 
 
 <h2 class="section-title">
 
 Technical
+
+<br>
 
 <em>Skills.</em>
 
@@ -2135,7 +2576,7 @@ Technical
 
 
 <h3>
-VLSI &amp; RTL Design
+VLSI & RTL Design
 </h3>
 
 
@@ -2154,6 +2595,7 @@ VLSI &amp; RTL Design
 </div>
 
 </div>
+
 
 
 <!-- Embedded -->
@@ -2186,6 +2628,7 @@ Embedded Hardware
 </div>
 
 
+
 <!-- Python -->
 
 <div class="skill">
@@ -2196,7 +2639,7 @@ Embedded Hardware
 
 
 <h3>
-Python &amp; Machine Learning
+Python & Machine Learning
 </h3>
 
 
@@ -2221,18 +2664,20 @@ Python &amp; Machine Learning
 </section>
 
 
-<!-- =========================
+
+<!-- =======================================================
      EDUCATION
-========================= -->
+======================================================= -->
 
 <section class="section education" id="education">
 
 <div class="section-label">
-05 — EDUCATION &amp; RESEARCH
+05 — Education
 </div>
 
 
 <div class="education-grid">
+
 
 <div>
 
@@ -2242,7 +2687,7 @@ Academic
 
 <br>
 
-<em>foundation.</em>
+<em>journey.</em>
 
 </h2>
 
@@ -2251,6 +2696,8 @@ Academic
 
 <div class="education-list">
 
+
+<!-- MTECH -->
 
 <div class="education-item">
 
@@ -2275,6 +2722,9 @@ CGPA: 8.09
 
 </div>
 
+
+
+<!-- BE -->
 
 <div class="education-item">
 
@@ -2305,7 +2755,8 @@ CGPA: 7.94
 </div>
 
 
-<!-- SCHOOL DETAILS -->
+
+<!-- SCHOOL -->
 
 <div class="school-details">
 
@@ -2351,71 +2802,108 @@ S.B.O.A School and Junior College
 
 </div>
 
-</div>
-
-
-<!-- PUBLICATION -->
-
-<div class="publication">
-
-<span>
-IEEE · ICCSP 2024
-</span>
-
-
-<h3>
-
-Early Diagnosis of Parkinson's Disease
-Using Machine Learning
-
-</h3>
-
-
-<p>
-
-Presented at ICCSP 2024.
-
-</p>
 
 </div>
 
 
-<!-- CERTIFICATIONS -->
+
+<!-- =======================================================
+     CERTIFICATIONS
+======================================================= -->
 
 <div class="certifications">
 
 <div class="section-label">
-CERTIFICATIONS
+Certifications
 </div>
 
 
 <div class="certificates">
 
-<span>
-Sensor and Actuators — NPTEL
+
+<!-- IEEE -->
+
+<div class="certificate">
+
+<span class="certificate-type">
+IEEE · ICCSP 2024
 </span>
 
-<span>
-Internet Of Things — NPTEL
+<h3>
+Early Diagnosis of Parkinson's Disease Using Machine Learning
+</h3>
+
+</div>
+
+
+
+<!-- DIGITAL VLSI -->
+
+<div class="certificate">
+
+<span class="certificate-type">
+NPTEL
 </span>
+
+<h3>
+Digital VLSI Testing
+</h3>
+
+</div>
+
+
+
+<!-- SENSOR -->
+
+<div class="certificate">
+
+<span class="certificate-type">
+NPTEL
+</span>
+
+<h3>
+Sensor and Actuators
+</h3>
+
+</div>
+
+
+
+<!-- IOT -->
+
+<div class="certificate">
+
+<span class="certificate-type">
+NPTEL
+</span>
+
+<h3>
+Internet of Things
+</h3>
+
+</div>
+
 
 </div>
 
 </div>
+
 
 </section>
 
 
-<!-- =========================
+
+<!-- =======================================================
      CONTACT
-========================= -->
+======================================================= -->
 
 <section class="contact" id="contact">
 
 <div class="contact-inner">
 
+
 <div class="section-label">
-06 — CONTACT
+06 — Contact
 </div>
 
 
@@ -2433,13 +2921,14 @@ Let's build
 <p class="contact-description">
 
 I am eager to learn, apply my practical knowledge and
-grow through challenging opportunities in VLSI design,
+grow through challenging opportunities in VLSI Design,
 RTL Design, Design Verification and Physical Design.
 
 </p>
 
 
 <div class="hero-buttons">
+
 
 <a
 href="mailto:jkeerthikumar2002@gmail.com"
@@ -2469,6 +2958,7 @@ GitHub ↗
 
 </a>
 
+
 </div>
 
 </div>
@@ -2478,6 +2968,11 @@ GitHub ↗
 
 </main>
 
+
+
+<!-- =======================================================
+     FOOTER
+======================================================= -->
 
 <footer>
 
@@ -2491,6 +2986,11 @@ VLSI · RTL · Embedded
 
 </footer>
 
+
+
+<!-- =======================================================
+     JAVASCRIPT
+======================================================= -->
 
 <script>
 
@@ -2507,20 +3007,44 @@ function toggleMenu() {
         nav.style.display = "flex";
 
         nav.style.position = "absolute";
-        nav.style.top = "76px";
+
+        nav.style.top = "78px";
+
         nav.style.left = "0";
+
         nav.style.right = "0";
 
         nav.style.padding = "25px";
 
-        nav.style.background = "#f4f3ee";
+        nav.style.background = "rgba(6,10,20,.97)";
+
+        nav.style.borderBottom = "1px solid rgba(69,231,255,.15)";
 
         nav.style.flexDirection = "column";
-    }
 
+        nav.style.gap = "20px";
+    }
 }
 
+
+/* close mobile menu after clicking */
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        if (window.innerWidth <= 850) {
+
+            document.querySelector(".nav-links").style.display = "none";
+
+        }
+
+    });
+
+});
+
 </script>
+
 
 </body>
 </html>
