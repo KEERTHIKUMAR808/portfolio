@@ -1876,6 +1876,101 @@ footer {
     }
 }
 
+
+/* =========================================================
+   WHATSAPP MESSAGE BOX
+========================================================= */
+
+.message-box {
+    margin-top: 55px;
+    max-width: 850px;
+    padding: 32px;
+    background: linear-gradient(145deg, rgba(17,28,50,.9), rgba(8,14,28,.9));
+    border: 1px solid var(--line);
+}
+
+.message-box-heading {
+    font-family: "Space Grotesk";
+    font-size: clamp(28px, 4vw, 42px);
+    line-height: 1;
+    letter-spacing: -.045em;
+}
+
+.message-box-description {
+    margin-top: 15px;
+    color: #8997ad;
+    font-size: 14px;
+}
+
+.whatsapp-form {
+    display: grid;
+    gap: 18px;
+    margin-top: 28px;
+}
+
+.message-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.whatsapp-form label {
+    display: grid;
+    gap: 8px;
+    color: #9aa8bf;
+    font-family: "JetBrains Mono";
+    font-size: 10px;
+}
+
+.whatsapp-form input,
+.whatsapp-form textarea {
+    width: 100%;
+    border: 1px solid rgba(130,160,210,.22);
+    border-radius: 6px;
+    padding: 13px 14px;
+    background: rgba(3,8,18,.72);
+    color: var(--text);
+    font-family: "DM Sans", sans-serif;
+    font-size: 13px;
+    outline: none;
+    resize: vertical;
+}
+
+.whatsapp-form input:focus,
+.whatsapp-form textarea:focus {
+    border-color: var(--cyan);
+    box-shadow: 0 0 0 3px rgba(69,231,255,.08);
+}
+
+.contact-submit {
+    width: fit-content;
+    border: 0;
+    cursor: pointer;
+    gap: 10px;
+}
+
+.contact-submit svg {
+    width: 18px;
+    height: 18px;
+}
+
+
+
+
+@media(max-width:600px) {
+    .message-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .message-box {
+        padding: 22px;
+    }
+
+    .contact-submit {
+        width: 100%;
+    }
+}
+
 </style>
 </head>
 
@@ -2950,9 +3045,52 @@ GitHub ↗
 
 </div>
 
+
+<div class="message-box">
+    <div class="message-box-heading">Leave a message for Keerthikumar</div>
+    <p class="message-box-description">
+        Have a question, opportunity or project idea? Your message will be sent directly to my email. I’ll review it and reply by email.
+    </p>
+
+    <form action="https://formsubmit.co/jkeerthikumar2002@gmail.com" method="POST" class="whatsapp-form">
+    <input type="hidden" name="_subject" value="New Portfolio Contact Message">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_next" value="https://keerthikumar808.github.io/portfolio/">
+
+    <div class="message-fields">
+        <label>
+            Your Name
+            <input type="text" name="name" placeholder="Enter your name" required>
+        </label>
+
+        <label>
+            Your Email
+            <input type="email" name="email" placeholder="Enter your email" required>
+        </label>
+    </div>
+
+    <label>
+        Your Message
+        <textarea name="message" rows="5" placeholder="Write your message here..." required></textarea>
+    </label>
+
+    <button type="submit" class="button button-primary contact-submit">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 2 11 13"></path>
+            <path d="m22 2-7 20-4-9-9-4Z"></path>
+        </svg>
+        Send Message
+    </button>
+</form>
+</div>
+
 </div>
 
 </section>
+
+
+
 
 
 </main>
@@ -3031,6 +3169,28 @@ document.querySelectorAll(".nav-links a").forEach(link => {
     });
 
 });
+
+
+const whatsappForm = document.getElementById("whatsappForm");
+
+if (whatsappForm) {
+    whatsappForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById("visitorName").value.trim();
+        const email = document.getElementById("visitorEmail").value.trim();
+        const message = document.getElementById("visitorMessage").value.trim();
+
+        const whatsappMessage =
+            `Hello Keerthikumar,\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+
+        const whatsappUrl =
+            "https://wa.me/919841610808?text=" +
+            encodeURIComponent(whatsappMessage);
+
+        window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    });
+}
 
 </script>
 
